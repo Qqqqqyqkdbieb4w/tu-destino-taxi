@@ -1,351 +1,233 @@
-/* ===== ESTILOS GENERALES - TU DESTINO TAXI ===== */
+/* ===== TU DESTINO TAXI - ESTILO UBER OSCURO ===== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+:root {
+    --fondo: #000000;
+    --tarjeta: #1c1c1e;
+    --input: #2c2c2e;
+    --borde: #38383a;
+    --texto: #ffffff;
+    --texto-secundario: #8e8e93;
+    --azul: #007aff;
+    --verde: #34c759;
+    --rojo: #ff3b30;
+    --gris: #8e8e93;
 }
 
 body {
-    background: #f8f9fa;
-    color: #202124;
-    line-height: 1.6;
+    background: var(--fondo);
+    color: var(--texto);
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
 .pantalla {
     display: none;
     min-height: 100vh;
+    flex-direction: column;
 }
 .pantalla.activa {
-    display: block;
-}
-
-/* ===== LOGIN ===== */
-.contenedor-login {
-    max-width: 420px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    text-align: center;
-}
-
-.logo-login {
-    width: 90px;
-    height: 90px;
-    margin-bottom: 10px;
-}
-
-.contenedor-login h1 {
-    color: #1a73e8;
-    font-size: 26px;
-    margin-bottom: 5px;
-}
-
-.subtitulo-login {
-    color: #5f6368;
-    margin-bottom: 30px;
-}
-
-.grupo-input {
-    text-align: left;
-    margin-bottom: 18px;
-}
-
-.grupo-input label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: 500;
-    color: #3c4043;
-}
-
-.grupo-input input {
-    width: 100%;
-    padding: 14px;
-    border: 1px solid #dadce0;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: border 0.2s;
-}
-
-.grupo-input input:focus {
-    outline: none;
-    border-color: #1a73e8;
-}
-
-.btn-principal {
-    width: 100%;
-    padding: 14px;
-    background: #1a73e8;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 8px;
-    transition: background 0.2s;
-}
-.btn-principal:hover { background: #1557b0; }
-
-.btn-secundario {
-    width: 100%;
-    padding: 12px;
-    background: white;
-    color: #1a73e8;
-    border: 1px solid #1a73e8;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-.btn-secundario:hover { background: #e8f0fe; }
-
-.error {
-    color: #d93025;
-    margin-top: 12px;
-    font-size: 15px;
-}
-
-/* ===== BARRA SUPERIOR ===== */
-.barra-superior {
-    background: #1a73e8;
-    color: white;
-    padding: 14px 20px;
     display: flex;
-    justify-content: space-between;
+}
+.oculto { display: none !important; }
+
+/* ===== BIENVENIDA ===== */
+.bienvenida-contenedor {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    justify-content: center;
+    padding: 40px 32px;
+}
+.bienvenida-logo { font-size: 72px; margin-bottom: 16px; }
+.bienvenida-titulo { font-size: 34px; font-weight: 700; margin-bottom: 8px; }
+.bienvenida-subtitulo { color: var(--texto-secundario); font-size: 17px; margin-bottom: 48px; }
+.bienvenida-botones { width: 100%; display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
+.btn-bienvenida {
+    width: 100%; padding: 16px; border-radius: 12px; font-size: 17px; font-weight: 600; border: none; cursor: pointer;
+}
+.btn-bienvenida.principal { background: var(--azul); color: white; }
+.btn-bienvenida.secundario { background: var(--tarjeta); color: var(--texto); border: 1px solid var(--borde); }
+.bienvenida-ingresar { font-size: 15px; color: var(--texto-secundario); }
+.bienvenida-ingresar a { color: var(--azul); text-decoration: none; }
+
+/* ===== AUTH ===== */
+.auth-contenedor { padding: 20px; flex: 1; }
+.btn-volver { background: none; border: none; color: var(--texto); font-size: 18px; cursor: pointer; padding: 8px 0; margin-bottom: 16px; }
+.auth-contenedor h2 { font-size: 28px; margin-bottom: 4px; }
+.auth-sub { color: var(--texto-secundario); margin-bottom: 28px; font-size: 15px; }
+.input-group { margin-bottom: 16px; }
+.input-group label { display: block; font-size: 14px; color: var(--texto-secundario); margin-bottom: 6px; }
+.input-group input {
+    width: 100%; padding: 14px 16px; background: var(--input); border: 1px solid var(--borde); border-radius: 10px;
+    color: var(--texto); font-size: 16px;
+}
+.input-group input:focus { outline: none; border-color: var(--azul); }
+.btn-auth {
+    width: 100%; padding: 15px; background: var(--azul); color: white; border: none; border-radius: 10px;
+    font-size: 17px; font-weight: 600; cursor: pointer; margin-top: 8px;
+}
+.btn-auth.secundario { background: var(--tarjeta); border: 1px solid var(--borde); color: var(--texto); margin-top: 16px; }
+.auth-divider { text-align: center; margin: 28px 0; color: var(--texto-secundario); position: relative; }
+.auth-divider::before, .auth-divider::after {
+    content: ''; position: absolute; top: 50%; width: 40%; height: 1px; background: var(--borde);
+}
+.auth-divider::before { left: 0; }
+.auth-divider::after { right: 0; }
+.auth-msj { margin-top: 12px; text-align: center; font-size: 15px; }
+
+/* ===== MAPA ===== */
+.mapa-container {
+    flex: 1; background: linear-gradient(180deg, #1a2c42 0%, #000000 100%); position: relative; min-height: 400px;
+}
+.mapa-simulado {
+    width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; position: relative;
+}
+.mapa-puntos { text-align: center; }
+.punto-mapa { width: 12px; height: 12px; border-radius: 50%; display: block; margin: 20px auto; }
+.punto-mapa.origen { background: var(--verde); }
+.punto-mapa.destino { background: var(--rojo); }
+.linea-ruta { width: 2px; height: 40px; background: linear-gradient(180deg, var(--verde), var(--rojo)); margin: 0 auto; }
+.mi-ubicacion-boton {
+    position: absolute; bottom: 20px; right: 20px; width: 48px; height: 48px; background: var(--tarjeta);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 1px solid var(--borde);
 }
 
-.info-usuario {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 15px;
+/* ===== TARJETA FLOTANTE ===== */
+.tarjeta-viaje-flotante {
+    position: fixed; bottom: 70px; left: 0; right: 0; background: var(--tarjeta); border-top-left-radius: 20px; border-top-right-radius: 20px;
+    padding: 20px; box-shadow: 0 -4px 20px rgba(0,0,0,0.4); z-index: 10;
+}
+.barra-usuario { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 20px; }
+.btn-foto-usuario {
+    width: 40px; height: 40px; background: var(--input); border: none; border-radius: 50%; font-size: 20px; cursor: pointer; flex-shrink: 0;
+}
+.entradas-ubicacion { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.fila-ubicacion {
+    display: flex; align-items: center; gap: 10px; background: var(--input); border-radius: 8px; padding: 10px 12px;
+}
+.punto-chico { font-size: 10px; }
+.punto-chico.verde { color: var(--verde); }
+.punto-chico.rojo { color: var(--rojo); }
+.fila-ubicacion input {
+    background: transparent; border: none; color: var(--texto); font-size: 15px; outline: none; width: 100%;
 }
 
-.btn-salir {
-    background: rgba(255,255,255,0.2);
-    color: white;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
+/* ===== VEHÍCULOS ===== */
+.titulo-seleccion { font-size: 15px; color: var(--texto-secundario); margin-bottom: 12px; }
+.lista-vehiculos { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
+.vehiculo-opcion {
+    display: flex; align-items: center; justify-content: space-between; padding: 14px 12px; background: var(--input);
+    border-radius: 10px; border: 2px solid transparent; cursor: pointer; transition: all 0.2s;
 }
-.btn-salir:hover { background: rgba(255,255,255,0.3); }
-
-/* ===== NAVEGACIÓN ===== */
-.navegacion {
-    display: flex;
-    background: white;
-    border-bottom: 1px solid #e8eaed;
-    overflow-x: auto;
-}
-
-.nav-btn {
-    padding: 14px 20px;
-    background: transparent;
-    border: none;
-    font-size: 15px;
-    color: #5f6368;
-    cursor: pointer;
-    border-bottom: 3px solid transparent;
-    white-space: nowrap;
-}
-.nav-btn.activo {
-    color: #1a73e8;
-    border-bottom-color: #1a73e8;
-    font-weight: 500;
-}
-.nav-btn:hover { background: #f8f9fa; }
-
-/* ===== CONTENIDO PRINCIPAL ===== */
-.contenido-principal {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+.vehiculo-opcion.seleccionado { border-color: var(--azul); background: rgba(0, 122, 255, 0.15); }
+.vehiculo-info { display: flex; align-items: center; gap: 12px; }
+.icono-vehiculo { font-size: 28px; }
+.nombre-vehiculo { font-weight: 600; font-size: 15px; }
+.detalle-vehiculo { font-size: 13px; color: var(--texto-secundario); margin-top: 2px; }
+.precio-vehiculo { font-weight: 600; font-size: 15px; }
+.btn-solicitar {
+    width: 100%; padding: 15px; background: var(--azul); color: white; border: none; border-radius: 10px;
+    font-size: 17px; font-weight: 600; cursor: pointer;
 }
 
-.seccion { display: none; }
-.seccion.activa { display: block; }
-
-.hero {
-    background: linear-gradient(135deg, #1a73e8 0%, #4285f4 100%);
-    color: white;
-    padding: 35px 25px;
-    border-radius: 16px;
-    text-align: center;
-    margin-bottom: 40px;
+/* ===== NAV INFERIOR ===== */
+.nav-inferior {
+    position: fixed; bottom: 0; left: 0; right: 0; display: flex; background: var(--tarjeta); border-top: 1px solid var(--borde);
+    padding: 10px 0 25px; z-index: 5;
 }
-
-.hero h3 { font-size: 24px; margin-bottom: 10px; }
-.hero-descripcion { font-size: 16px; margin-bottom: 20px; opacity: 0.95; }
-
-.btn-accion {
-    background: white;
-    color: #1a73e8;
-    border: none;
-    padding: 14px 28px;
-    border-radius: 8px;
-    font-size: 17px;
-    font-weight: 600;
-    cursor: pointer;
+.nav-item {
+    flex: 1; background: none; border: none; color: var(--texto-secundario); font-size: 13px; cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
 }
-.btn-accion:hover { background: #f8f9fa; }
+.nav-item.activo { color: var(--azul); font-weight: 500; }
 
-.titulo-seccion {
-    font-size: 22px;
-    margin: 40px 0 20px;
-    color: #202124;
-    text-align: center;
+/* ===== BUSCANDO CONDUCTOR ===== */
+.buscando-contenedor { flex: 1; display: flex; flex-direction: column; background: var(--fondo); }
+.mapa-mini { height: 280px; background: linear-gradient(180deg, #1a2c42 0%, #000 100%); }
+.buscando-info { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 30px; text-align: center; }
+.spinner-auto { font-size: 48px; animation: girar 1.5s linear infinite; margin-bottom: 24px; }
+@keyframes girar { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.buscando-info h3 { font-size: 22px; margin-bottom: 10px; }
+.buscando-info p { color: var(--texto-secundario); font-size: 15px; margin-bottom: 30px; }
+.btn-cancelar { padding: 14px 30px; background: var(--tarjeta); color: var(--rojo); border: 1px solid var(--rojo); border-radius: 10px; font-size: 16px; cursor: pointer; }
+
+/* ===== CONDUCTOR EN CAMINO ===== */
+.conductor-camino { flex: 1; display: flex; flex-direction: column; }
+.mapa-mini-conductor { height: 220px; background: linear-gradient(180deg, #1a2c42 0%, #000 100%); position: relative; }
+.tarjeta-conductor {
+    flex: 1; background: var(--tarjeta); border-top-left-radius: 20px; border-top-right-radius: 20px;
+    padding: 24px 20px 40px; margin-top: -20px; z-index: 2;
 }
-
-/* ===== GRID CARACTERÍSTICAS ===== */
-.grid-caracteristicas {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-    margin-bottom: 30px;
+.tiempo-llegada { text-align: center; margin-bottom: 20px; }
+.minutos { font-size: 42px; font-weight: 700; color: var(--azul); }
+.tiempo-llegada p { color: var(--texto-secundario); font-size: 15px; }
+.foto-conductor-grande {
+    width: 80px; height: 80px; background: var(--input); border-radius: 50%; margin: 0 auto 14px; display: flex;
+    align-items: center; justify-content: center; font-size: 40px;
 }
-
-.tarjeta-caracteristica {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-    transition: transform 0.2s;
+.datos-conductor { text-align: center; margin-bottom: 20px; }
+.datos-conductor h4 { font-size: 18px; margin-bottom: 4px; }
+.auto { color: var(--texto-secundario); font-size: 15px; }
+.placa { font-family: monospace; background: var(--input); padding: 2px 8px; border-radius: 4px; display: inline-block; margin: 6px 0; font-size: 14px; }
+.calificacion { color: #ffcc00; font-size: 14px; }
+.acciones-conductor { display: flex; gap: 10px; margin-bottom: 24px; }
+.btn-accion-conductor {
+    flex: 1; padding: 12px; border: none; border-radius: 10px; font-size: 15px; font-weight: 500; cursor: pointer;
 }
-.tarjeta-caracteristica:hover { transform: translateY(-3px); }
+.llamar { background: var(--azul); color: white; }
+.msg { background: var(--verde); color: white; }
+.cancelar { background: var(--input); color: var(--rojo); flex: 0.3; }
+.resumen-viaje { background: var(--input); border-radius: 12px; padding: 16px; }
+.ruta-puntos { display: flex; align-items: center; gap: 10px; padding: 6px 0; }
+.punto { font-size: 12px; }
+.punto.verde { color: var(--verde); }
+.punto.rojo { color: var(--rojo); }
+.dir { flex: 1; font-size: 15px; }
+.total-viaje { display: flex; justify-content: space-between; padding-top: 10px; margin-top: 8px; border-top: 1px solid var(--borde); font-weight: 600; font-size: 16px; }
 
-.tarjeta-caracteristica .icono { font-size: 40px; margin-bottom: 12px; display: block; }
-.tarjeta-caracteristica h3 { font-size: 18px; margin-bottom: 8px; color: #202124; }
-.tarjeta-caracteristica p { color: #5f6368; font-size: 15px; }
-
-/* ===== TESTIMONIOS ===== */
-.grid-testimonios {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 20px;
-    margin-bottom: 30px;
+/* ===== CABECERA SIMPLE ===== */
+.cabecera-simple {
+    display: flex; align-items: center; justify-content: space-between; padding: 14px 20px;
+    background: var(--tarjeta); border-bottom: 1px solid var(--borde);
 }
+.cabecera-simple h2 { font-size: 18px; font-weight: 600; }
 
-.tarjeta-testimonio {
-    background: #f8f9fa;
-    padding: 25px;
-    border-radius: 12px;
-    border-left: 4px solid #1a73e8;
+/* ===== LISTA VIAJES ===== */
+.lista-viajes { padding: 16px; }
+.viaje-item {
+    background: var(--tarjeta); border-radius: 12px; padding: 16px; margin-bottom: 12px;
+    display: flex; justify-content: space-between; align-items: flex-start;
 }
+.fecha-viaje { font-size: 13px; color: var(--texto-secundario); margin-bottom: 6px; }
+.ruta-viaje p { font-size: 15px; }
+.detalle-viaje { font-size: 13px; color: var(--texto-secundario); margin-top: 2px; }
+.precio-viaje { font-weight: 600; font-size: 15px; }
 
-.estrellas { color: #fbbc04; font-size: 18px; margin-bottom: 10px; }
-.tarjeta-testimonio p { font-style: italic; color: #3c4043; margin-bottom: 12px; }
-.tarjeta-testimonio strong { color: #202124; }
-
-/* ===== SERVICIOS ===== */
-.grid-servicios {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+/* ===== PERFIL ===== */
+.contenido-perfil { padding: 30px 20px; text-align: center; }
+.foto-perfil {
+    width: 80px; height: 80px; background: var(--tarjeta); border-radius: 50%; margin: 0 auto 16px;
+    display: flex; align-items: center; justify-content: center; font-size: 36px;
 }
-
-.tarjeta-servicio {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+.contenido-perfil h3 { font-size: 20px; margin-bottom: 4px; }
+.contenido-perfil p { color: var(--texto-secundario); font-size: 15px; margin-bottom: 30px; }
+.menu-cuenta { list-style: none; text-align: left; }
+.menu-cuenta li {
+    padding: 16px 20px; background: var(--tarjeta); margin-bottom: 8px; border-radius: 10px;
+    display: flex; justify-content: space-between; align-items: center; font-size: 15px; cursor: pointer;
 }
-.tarjeta-servicio h3 { font-size: 18px; margin-bottom: 10px; color: #1a73e8; }
-.tarjeta-servicio p { color: #5f6368; }
-
-/* ===== PRECIOS ===== */
-.grid-precios {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-}
-
-.tarjeta-precio {
-    background: white;
-    padding: 30px 25px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-    position: relative;
-}
-.tarjeta-precio.destacado {
-    border: 2px solid #1a73e8;
-    transform: scale(1.03);
-}
-
-.etiqueta-mas-popular {
-    position: absolute;
-    top: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #1a73e8;
-    color: white;
-    padding: 4px 16px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 500;
-}
-
-.tarjeta-precio h3 { font-size: 20px; margin-bottom: 10px; }
-.precio { font-size: 42px; font-weight: 700; color: #1a73e8; margin-bottom: 20px; }
-.precio span { font-size: 16px; color: #5f6368; font-weight: normal; }
-
-.tarjeta-precio ul { list-style: none; margin-bottom: 25px; text-align: left; }
-.tarjeta-precio li { padding: 8px 0; border-bottom: 1px solid #f1f3f4; font-size: 15px; }
-
-.btn-plan {
-    width: 100%;
-    padding: 13px;
-    background: #1a73e8;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-}
-.btn-plan:hover { background: #1557b0; }
-
-/* ===== CONTACTO ===== */
-.contenedor-contacto {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-}
-
-.info-contacto p {
-    padding: 10px 0;
-    font-size: 16px;
-    border-bottom: 1px solid #e8eaed;
-}
-
-.redes-sociales h3 { margin-bottom: 15px; color: #1a73e8; }
-.redes-sociales a {
-    display: block;
-    padding: 10px 0;
-    color: #1a73e8;
-    text-decoration: none;
-    font-size: 16px;
-}
-.redes-sociales a:hover { text-decoration: underline; }
-
-/* ===== PIE DE PÁGINA ===== */
-.pie-pagina {
-    text-align: center;
-    padding: 25px;
-    color: #5f6368;
-    font-size: 14px;
-    border-top: 1px solid #e8eaed;
-    margin-top: 40px;
-}
+.menu-cuenta li.salir { color: var(--rojo); margin-top: 20px; }
 
 /* ===== RESPONSIVO ===== */
-@media (max-width: 768px) {
-    .contenedor-contacto { grid-template-columns: 1fr; }
-    .tarjeta-precio.destacado { transform: none; }
-    .navegacion { justify-content: space-around; }
+@media (max-width: 380px) {
+    .tarjeta-viaje-flotante { padding: 16px; }
+    .icono-vehiculo { font-size: 24px; }
+    .nombre-vehiculo { font-size: 14px; }
 }
