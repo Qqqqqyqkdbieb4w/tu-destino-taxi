@@ -3,223 +3,256 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu Destino Taxi - Servicio Confiable 🚕</title>
+    <title>Tu Destino Taxi 🚕</title>
     <link rel="stylesheet" href="estilo.css">
-    <link rel="manifest" href="manifiesto.webmanifest">
-    <meta name="theme-color" content="#1a73e8">
+    <meta name="theme-color" content="#000000">
 </head>
 <body>
-    <!-- PANTALLA DE LOGIN -->
-    <div id="pantalla-login" class="pantalla activa">
-        <div class="contenedor-login">
-            <img src="icono-192.png" alt="Tu Destino Taxi" class="logo-login">
-            <h1>🚕 Tu Destino Taxi</h1>
-            <p class="subtitulo-login">Tu destino seguro y confiable</p>
-            
-            <div class="grupo-input">
-                <label>👤 Usuario</label>
-                <input type="text" id="usuario" placeholder="Escribe tu usuario">
+    <!-- PANTALLA DE BIENVENIDA -->
+    <div id="pantalla-bienvenida" class="pantalla activa">
+        <div class="bienvenida-contenedor">
+            <div class="bienvenida-logo">🚕</div>
+            <h1 class="bienvenida-titulo">Tu Destino Taxi</h1>
+            <p class="bienvenida-subtitulo">Tu viaje, seguro y confiable</p>
+            <div class="bienvenida-botones">
+                <button class="btn-bienvenida principal" onclick="mostrarLogin('pasajero')">
+                    👤 Soy Pasajero
+                </button>
+                <button class="btn-bienvenida secundario" onclick="mostrarLogin('conductor')">
+                    🚗 Soy Conductor
+                </button>
             </div>
-            
-            <div class="grupo-input">
-                <label>🔒 Contraseña</label>
-                <input type="password" id="contrasena" placeholder="Escribe tu contraseña">
-            </div>
-            
-            <button onclick="iniciarSesion()" class="btn-principal">Entrar</button>
-            <p id="mensaje-error" class="error"></p>
-
-            <hr style="margin: 25px 0; border-color: #eee;">
-            
-            <h3>👤 Crear nuevo perfil</h3>
-            <div class="grupo-input">
-                <label>Nuevo Usuario</label>
-                <input type="text" id="nuevo-usuario" placeholder="Nombre de usuario">
-            </div>
-            <div class="grupo-input">
-                <label>Nueva Contraseña</label>
-                <input type="password" id="nueva-contrasena" placeholder="Crea tu contraseña">
-            </div>
-            <button onclick="registrarUsuario()" class="btn-secundario">Crear Perfil</button>
+            <p class="bienvenida-ingresar">¿Ya tienes cuenta? <a href="#" onclick="mostrarPantalla('pantalla-login'); return false;">Ingresar</a></p>
         </div>
     </div>
 
-    <!-- PANTALLA PRINCIPAL - TU DESTINO TAXI -->
-    <div id="pantalla-principal" class="pantalla">
-        <!-- Barra Superior -->
-        <header class="barra-superior">
-            <h2>🚕 Tu Destino Taxi</h2>
-            <div class="info-usuario">
-                <span id="nombre-usuario-actual"></span>
-                <button onclick="cerrarSesion()" class="btn-salir">Salir</button>
+    <!-- PANTALLA LOGIN / REGISTRO -->
+    <div id="pantalla-login" class="pantalla">
+        <div class="auth-contenedor">
+            <button class="btn-volver" onclick="mostrarPantalla('pantalla-bienvenida')">←</button>
+            <h2 id="auth-titulo">Iniciar Sesión</h2>
+            <p id="auth-subtitulo" class="auth-sub">Pasajero</p>
+
+            <div class="auth-form">
+                <div class="input-group">
+                    <label>📱 Teléfono</label>
+                    <input type="tel" id="auth-telefono" placeholder="+1 (809) 000-0000">
+                </div>
+                <div class="input-group">
+                    <label>🔒 Contraseña</label>
+                    <input type="password" id="auth-clave" placeholder="Tu contraseña">
+                </div>
+                <button class="btn-auth" onclick="iniciarSesion()">Iniciar sesión</button>
+
+                <div class="auth-divider">
+                    <span>o crea tu cuenta</span>
+                </div>
+
+                <div class="input-group">
+                    <label>👤 Nombre completo</label>
+                    <input type="text" id="reg-nombre" placeholder="Tu nombre y apellido">
+                </div>
+                <div class="input-group">
+                    <label>✉️ Correo</label>
+                    <input type="email" id="reg-correo" placeholder="tu@email.com">
+                </div>
+                <div class="input-group">
+                    <label>🔒 Contraseña</label>
+                    <input type="password" id="reg-clave" placeholder="Crea tu contraseña">
+                </div>
+                <button class="btn-auth secundario" onclick="registrarUsuario()">Crear cuenta</button>
+                <p id="auth-mensaje" class="auth-msj"></p>
             </div>
-        </header>
+        </div>
+    </div>
 
-        <!-- Navegación -->
-        <nav class="navegacion">
-            <button class="nav-btn activo" onclick="mostrarSeccion('inicio')">Inicio</button>
-            <button class="nav-btn" onclick="mostrarSeccion('servicios')">Servicios</button>
-            <button class="nav-btn" onclick="mostrarSeccion('precios')">Precios</button>
-            <button class="nav-btn" onclick="mostrarSeccion('contacto')">Contacto</button>
+    <!-- PANTALLA PRINCIPAL - MAPA ESTILO UBER -->
+    <div id="pantalla-mapa" class="pantalla">
+        <!-- MAPA DE FONDO -->
+        <div class="mapa-container">
+            <div class="mapa-simulado">
+                <div class="mapa-puntos">
+                    <div class="punto-mapa origen"></div>
+                    <div class="linea-ruta"></div>
+                    <div class="punto-mapa destino"></div>
+                </div>
+                <div class="mi-ubicacion-boton">📍</div>
+            </div>
+        </div>
+
+        <!-- TARJETA DE SOLICITUD SUPERPUSTA -->
+        <div class="tarjeta-viaje-flotante">
+            <div class="barra-usuario">
+                <button class="btn-foto-usuario" onclick="mostrarPantalla('pantalla-perfil')">👤</button>
+                <div class="entradas-ubicacion">
+                    <div class="fila-ubicacion">
+                        <span class="punto-chico verde">●</span>
+                        <input type="text" id="origen" placeholder="Tu ubicación" value="Santiago, Rep. Dom.">
+                    </div>
+                    <div class="fila-ubicacion">
+                        <span class="punto-chico rojo">●</span>
+                        <input type="text" id="destino" placeholder="¿A dónde vas?">
+                    </div>
+                </div>
+            </div>
+
+            <!-- DESTINO INGRESADO → MOSTRAR TIPOS DE VEHÍCULOS -->
+            <div id="seleccion-vehiculos" class="oculto">
+                <p class="titulo-seleccion">Elige tu viaje</p>
+                <div class="lista-vehiculos">
+                    <div class="vehiculo-opcion seleccionado" onclick="seleccionarVehiculo(this, 'Economy', 145)">
+                        <div class="vehiculo-info">
+                            <span class="icono-vehiculo">🚗</span>
+                            <div>
+                                <div class="nombre-vehiculo">Economy</div>
+                                <div class="detalle-vehiculo">4 asientos • 5 min</div>
+                            </div>
+                        </div>
+                        <div class="precio-vehiculo">RD$ 145</div>
+                    </div>
+                    <div class="vehiculo-opcion" onclick="seleccionarVehiculo(this, 'Comfort', 190)">
+                        <div class="vehiculo-info">
+                            <span class="icono-vehiculo">🚙</span>
+                            <div>
+                                <div class="nombre-vehiculo">Comfort</div>
+                                <div class="detalle-vehiculo">Más espacio • 4 min</div>
+                            </div>
+                        </div>
+                        <div class="precio-vehiculo">RD$ 190</div>
+                    </div>
+                    <div class="vehiculo-opcion" onclick="seleccionarVehiculo(this, 'UberXL', 250)">
+                        <div class="vehiculo-info">
+                            <span class="icono-vehiculo">🚐</span>
+                            <div>
+                                <div class="nombre-vehiculo">XL</div>
+                                <div class="detalle-vehiculo">6 asientos • 6 min</div>
+                            </div>
+                        </div>
+                        <div class="precio-vehiculo">RD$ 250</div>
+                    </div>
+                </div>
+                <button class="btn-solicitar" onclick="confirmarViaje()">Confirmar Economy</button>
+            </div>
+        </div>
+
+        <!-- BARRA DE NAVEGACIÓN INFERIOR -->
+        <nav class="nav-inferior">
+            <button class="nav-item activo">📍 Inicio</button>
+            <button class="nav-item" onclick="mostrarPantalla('pantalla-actividad')">📋 Actividad</button>
+            <button class="nav-item" onclick="mostrarPantalla('pantalla-perfil')">👤 Cuenta</button>
         </nav>
-        
-        <main class="contenido-principal">
-            <!-- SECCIÓN: INICIO -->
-            <section id="sec-inicio" class="seccion activa">
-                <div class="hero">
-                    <h3>¡Bienvenido, <span id="user-name"></span>! 👋</h3>
-                    <p class="hero-descripcion">Simplifica tus viajes con Tu Destino Taxi. Seguro, rápido y confiable.</p>
-                    <button class="btn-accion">Reservar Viaje 🚗</button>
-                </div>
+    </div>
 
-                <h2 class="titulo-seccion">¿Por qué elegirnos?</h2>
-                <div class="grid-caracteristicas">
-                    <div class="tarjeta-caracteristica">
-                        <span class="icono">📊</span>
-                        <h3>Analíticas</h3>
-                        <p>Información detallada de tus viajes y estadísticas en tiempo real.</p>
-                    </div>
-                    <div class="tarjeta-caracteristica">
-                        <span class="icono">🛡️</span>
-                        <h3>Seguridad</h3>
-                        <p>Cifrado SSL y protección avanzada para tus datos personales.</p>
-                    </div>
-                    <div class="tarjeta-caracteristica">
-                        <span class="icono">💳</span>
-                        <h3>Pagos Seguros</h3>
-                        <p>Múltiples métodos de pago protegidos y sin sorpresas.</p>
-                    </div>
-                    <div class="tarjeta-caracteristica">
-                        <span class="icono">👥</span>
-                        <h3>Fácil Uso</h3>
-                        <p>Diseñada para que cualquiera pueda usarla sin complicaciones.</p>
-                    </div>
-                    <div class="tarjeta-caracteristica">
-                        <span class="icono">🔄</span>
-                        <h3>Colaboración</h3>
-                        <p>Comparte viajes y coordina con conductores y pasajeros fácilmente.</p>
-                    </div>
-                    <div class="tarjeta-caracteristica">
-                        <span class="icono">📱</span>
-                        <h3>Redes Sociales</h3>
-                        <p>Síguenos y contáctanos desde tus redes favoritas.</p>
-                    </div>
-                </div>
+    <!-- PANTALLA BUSCANDO CONDUCTOR -->
+    <div id="pantalla-buscando" class="pantalla">
+        <div class="buscando-contenedor">
+            <div class="mapa-mini"></div>
+            <div class="buscando-info">
+                <div class="spinner-auto">🚕</div>
+                <h3>Buscando conductor...</h3>
+                <p>Espera un momento, estamos encontrando el vehículo más cercano</p>
+                <button class="btn-cancelar" onclick="cancelarViaje()">✕ Cancelar</button>
+            </div>
+        </div>
+    </div>
 
-                <h2 class="titulo-seccion">Lo que dicen nuestros clientes</h2>
-                <div class="grid-testimonios">
-                    <div class="tarjeta-testimonio">
-                        <p class="estrellas">★★★★★</p>
-                        <p>"¡Excelente servicio! Siempre puntuales y muy seguros. Los recomiendo totalmente."</p>
-                        <strong>Cliente Frecuente</strong>
+    <!-- PANTALLA CONDUCTOR EN CAMINO -->
+    <div id="pantalla-conductor" class="pantalla">
+        <div class="conductor-camino">
+            <div class="mapa-mini-conductor"></div>
+            <div class="tarjeta-conductor">
+                <div class="tiempo-llegada">
+                    <span class="minutos">3 min</span>
+                    <p>Carlos está en camino</p>
+                </div>
+                <div class="foto-conductor-grande">🚗</div>
+                <div class="datos-conductor">
+                    <h4>Carlos Pérez</h4>
+                    <p class="auto">Toyota Corolla • Blanco</p>
+                    <p class="placa">A123456</p>
+                    <div class="calificacion">⭐ 4.9 • 2,842 viajes</div>
+                </div>
+                <div class="acciones-conductor">
+                    <button class="btn-accion-conductor llamar">📞 Llamar</button>
+                    <button class="btn-accion-conductor msg">💬 Mensaje</button>
+                    <button class="btn-accion-conductor cancelar" onclick="cancelarViaje()">✕</button>
+                </div>
+                <div class="resumen-viaje">
+                    <div class="ruta-puntos">
+                        <span class="punto verde">●</span>
+                        <span class="dir">Santiago, Rep. Dom.</span>
                     </div>
-                    <div class="tarjeta-testimonio">
-                        <p class="estrellas">★★★★★</p>
-                        <p>"El servicio más confiable que hemos utilizado. Conductores profesionales y vehículos impecables."</p>
-                        <strong>Cliente Satisfecho</strong>
+                    <div class="ruta-puntos">
+                        <span class="punto rojo">●</span>
+                        <span class="dir" id="destino-mostrado">Av. Duarte, Santiago</span>
                     </div>
-                    <div class="tarjeta-testimonio">
-                        <p class="estrellas">★★★★★</p>
-                        <p>"Simplemente increíble! Siempre llegan a tiempo y los precios son justos."</p>
-                        <strong>Cliente Feliz</strong>
+                    <div class="total-viaje">
+                        <span>Economy</span>
+                        <span id="precio-mostrado">RD$ 145</span>
                     </div>
                 </div>
-            </section>
+            </div>
+        </div>
+    </div>
 
-            <!-- SECCIÓN: SERVICIOS -->
-            <section id="sec-servicios" class="seccion">
-                <h2 class="titulo-seccion">Nuestros Servicios 🚗</h2>
-                <div class="grid-servicios">
-                    <div class="tarjeta-servicio">
-                        <h3>🚕 Viajes Urbanos</h3>
-                        <p>Traslados dentro de la ciudad con tarifas claras y sin sorpresas.</p>
-                    </div>
-                    <div class="tarjeta-servicio">
-                        <h3>✈️ Traslados al Aeropuerto</h3>
-                        <p>Siempre a tiempo. Monitoreamos vuelos para garantizar tu llegada.</p>
-                    </div>
-                    <div class="tarjeta-servicio">
-                        <h3>🏢 Viajes Corporativos</h3>
-                        <p>Facturación y gestión centralizada para empresas y empleados.</p>
-                    </div>
-                    <div class="tarjeta-servicio">
-                        <h3>👨‍👩‍👧‍👦 Viajes Familiares</h3>
-                        <p>Vehículos amplios y seguros para toda la familia con espacio adicional.</p>
-                    </div>
+    <!-- PANTALLA ACTIVIDAD / HISTORIAL -->
+    <div id="pantalla-actividad" class="pantalla">
+        <header class="cabecera-simple">
+            <button class="btn-volver" onclick="mostrarPantalla('pantalla-mapa')">←</button>
+            <h2>Actividad</h2>
+            <span></span>
+        </header>
+        <main class="lista-viajes">
+            <div class="viaje-item">
+                <div class="fecha-viaje">Hoy • 2:30 PM</div>
+                <div class="ruta-viaje">
+                    <p>📍 Av. Libertad → 🎯 Plaza Central</p>
+                    <p class="detalle-viaje">Economy • 8 min</p>
                 </div>
-            </section>
-
-            <!-- SECCIÓN: PRECIOS -->
-            <section id="sec-precios" class="seccion">
-                <h2 class="titulo-seccion">Planes y Tarifas 💰</h2>
-                <div class="grid-precios">
-                    <div class="tarjeta-precio">
-                        <h3>Individual</h3>
-                        <p class="precio"><sup>$</sup>99 <span>/mes</span></p>
-                        <ul>
-                            <li>✅ 1 usuario</li>
-                            <li>✅ Viajes ilimitados</li>
-                            <li>✅ Soporte por WhatsApp</li>
-                            <li>✅ Historial de viajes</li>
-                            <li>✅ Pagos seguros</li>
-                        </ul>
-                        <button class="btn-plan">Elegir Plan</button>
-                    </div>
-                    <div class="tarjeta-precio destacado">
-                        <span class="etiqueta-mas-popular">Más Popular</span>
-                        <h3>Equipo</h3>
-                        <p class="precio"><sup>$</sup>199 <span>/mes</span></p>
-                        <ul>
-                            <li>✅ Hasta 10 usuarios</li>
-                            <li>✅ Todo del plan Individual</li>
-                            <li>✅ Facturación automática</li>
-                            <li>✅ Panel de administración</li>
-                            <li>✅ Prioridad en reservas</li>
-                        </ul>
-                        <button class="btn-plan">Elegir Plan</button>
-                    </div>
-                    <div class="tarjeta-precio">
-                        <h3>Empresarial</h3>
-                        <p class="precio"><sup>$</sup>299 <span>/mes</span></p>
-                        <ul>
-                            <li>✅ Usuarios ilimitados</li>
-                            <li>✅ Todo del plan Equipo</li>
-                            <li>✅ API e integraciones</li>
-                            <li>✅ Gerente de cuenta dedicado</li>
-                            <li>✅ Reportes avanzados</li>
-                        </ul>
-                        <button class="btn-plan">Elegir Plan</button>
-                    </div>
+                <div class="precio-viaje">RD$ 135</div>
+            </div>
+            <div class="viaje-item">
+                <div class="fecha-viaje">Ayer • 8:15 AM</div>
+                <div class="ruta-viaje">
+                    <p>📍 Residencial Los Jardines → 🎯 Aeropuerto</p>
+                    <p class="detalle-viaje">Comfort • 28 min</p>
                 </div>
-            </section>
-
-            <!-- SECCIÓN: CONTACTO -->
-            <section id="sec-contacto" class="seccion">
-                <h2 class="titulo-seccion">Contáctanos 📞</h2>
-                <div class="contenedor-contacto">
-                    <div class="info-contacto">
-                        <p><strong>📍 Dirección:</strong> Santiago de los Caballeros, República Dominicana</p>
-                        <p><strong>📞 Teléfono:</strong> +1 (809) XXX-XXXX</p>
-                        <p><strong>✉️ Email:</strong> info@tudestinotaxi.com</p>
-                        <p><strong>⏰ Horario:</strong> 24 horas / 7 días</p>
-                    </div>
-                    <div class="redes-sociales">
-                        <h3>Síguenos 🌐</h3>
-                        <a href="#">📘 Facebook: @TuDestinoTaxi</a>
-                        <a href="#">📸 Instagram: @tudestinotaxi</a>
-                        <a href="#">🐦 Twitter: @TuDestinoTaxi</a>
-                        <a href="#">💬 WhatsApp: +1 (809) XXX-XXXX</a>
-                    </div>
+                <div class="precio-viaje">RD$ 380</div>
+            </div>
+            <div class="viaje-item">
+                <div class="fecha-viaje">28 ago • 7:40 PM</div>
+                <div class="ruta-viaje">
+                    <p>📍 Centro → 🎯 Villa González</p>
+                    <p class="detalle-viaje">XL • 35 min</p>
                 </div>
-            </section>
+                <div class="precio-viaje">RD$ 420</div>
+            </div>
         </main>
+    </div>
 
-        <!-- Pie de página -->
-        <footer class="pie-pagina">
-            <p>© 2026 Tu Destino Taxi. Todos los derechos reservados. 🚕</p>
-        </footer>
+    <!-- PANTALLA PERFIL -->
+    <div id="pantalla-perfil" class="pantalla">
+        <header class="cabecera-simple">
+            <button class="btn-volver" onclick="mostrarPantalla('pantalla-mapa')">←</button>
+            <h2>Cuenta</h2>
+            <span></span>
+        </header>
+        <main class="contenido-perfil">
+            <div class="foto-perfil">👤</div>
+            <h3 id="perfil-nombre">Tu Nombre</h3>
+            <p id="perfil-correo">correo@email.com</p>
+            <ul class="menu-cuenta">
+                <li>💳 Métodos de pago <span>›</span></li>
+                <li>📍 Direcciones guardadas <span>›</span></li>
+                <li>⭐ Calificaciones <span>›</span></li>
+                <li>❓ Ayuda <span>›</span></li>
+                <li>⚙️ Configuración <span>›</span></li>
+                <li class="salir" onclick="cerrarSesion()">🚪 Cerrar sesión <span>›</span></li>
+            </ul>
+        </main>
     </div>
 
     <script src="app.js"></script>
 </body>
-</html>
+</html>t
+Actualizar index estilo Uber oscuro 
