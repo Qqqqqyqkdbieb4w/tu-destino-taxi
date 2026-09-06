@@ -1,1 +1,225 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b63ce"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Tu Destino Taxi"><link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="style.css"><title>Tu Destino Taxi</title></head><body><header><div class="logo">🚕</div><div><h1>Tu Destino Taxi</h1><small>Tu viaje, a tu destino.</small></div></header><main><div class="switch"><button id="passengerBtn" class="active">Pasajero</button><button id="driverBtn">Conductor</button></div><section id="passenger"><div class="card"><h2>¿A dónde vas?</h2><input id="destination" placeholder="Escribe tu destino"><div class="map">📍<span>Mapa de tu viaje</span></div><div class="fares"><button data-fare="150">Económico<br><b>RD$150</b></button><button data-fare="200" class="selected">Confort<br><b>RD$200</b></button><button data-fare="300">Premium<br><b>RD$300</b></button></div><button id="request" class="primary">🚕 Solicitar taxi</button><p id="status" class="status"></p></div><div class="card"><h3>Mis viajes</h3><div id="history">No hay viajes todavía.</div></div></section><section id="driver" hidden><div class="card"><h2>Modo conductor</h2><div class="online"><span id="dot">●</span><b id="onlineText">Desconectado</b><button id="toggleOnline">Conectarme</button></div><div id="driverRequest" class="requestBox" hidden><b>Nueva solicitud</b><p id="driverDest">Destino</p><p>Tarifa: RD$200</p><button id="accept" class="primary">Aceptar viaje</button><button id="reject" class="secondary">Rechazar</button></div><div class="map">🚕<span>Zona de trabajo</span></div></div></section></main><footer>Tu Destino Taxi · Versión inicial</footer><script src="app.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Destino Taxi - Servicio Confiable 🚕</title>
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="manifest" href="manifiesto.webmanifest">
+    <meta name="theme-color" content="#1a73e8">
+</head>
+<body>
+    <!-- PANTALLA DE LOGIN -->
+    <div id="pantalla-login" class="pantalla activa">
+        <div class="contenedor-login">
+            <img src="icono-192.png" alt="Tu Destino Taxi" class="logo-login">
+            <h1>🚕 Tu Destino Taxi</h1>
+            <p class="subtitulo-login">Tu destino seguro y confiable</p>
+            
+            <div class="grupo-input">
+                <label>👤 Usuario</label>
+                <input type="text" id="usuario" placeholder="Escribe tu usuario">
+            </div>
+            
+            <div class="grupo-input">
+                <label>🔒 Contraseña</label>
+                <input type="password" id="contrasena" placeholder="Escribe tu contraseña">
+            </div>
+            
+            <button onclick="iniciarSesion()" class="btn-principal">Entrar</button>
+            <p id="mensaje-error" class="error"></p>
+
+            <hr style="margin: 25px 0; border-color: #eee;">
+            
+            <h3>👤 Crear nuevo perfil</h3>
+            <div class="grupo-input">
+                <label>Nuevo Usuario</label>
+                <input type="text" id="nuevo-usuario" placeholder="Nombre de usuario">
+            </div>
+            <div class="grupo-input">
+                <label>Nueva Contraseña</label>
+                <input type="password" id="nueva-contrasena" placeholder="Crea tu contraseña">
+            </div>
+            <button onclick="registrarUsuario()" class="btn-secundario">Crear Perfil</button>
+        </div>
+    </div>
+
+    <!-- PANTALLA PRINCIPAL - TU DESTINO TAXI -->
+    <div id="pantalla-principal" class="pantalla">
+        <!-- Barra Superior -->
+        <header class="barra-superior">
+            <h2>🚕 Tu Destino Taxi</h2>
+            <div class="info-usuario">
+                <span id="nombre-usuario-actual"></span>
+                <button onclick="cerrarSesion()" class="btn-salir">Salir</button>
+            </div>
+        </header>
+
+        <!-- Navegación -->
+        <nav class="navegacion">
+            <button class="nav-btn activo" onclick="mostrarSeccion('inicio')">Inicio</button>
+            <button class="nav-btn" onclick="mostrarSeccion('servicios')">Servicios</button>
+            <button class="nav-btn" onclick="mostrarSeccion('precios')">Precios</button>
+            <button class="nav-btn" onclick="mostrarSeccion('contacto')">Contacto</button>
+        </nav>
+        
+        <main class="contenido-principal">
+            <!-- SECCIÓN: INICIO -->
+            <section id="sec-inicio" class="seccion activa">
+                <div class="hero">
+                    <h3>¡Bienvenido, <span id="user-name"></span>! 👋</h3>
+                    <p class="hero-descripcion">Simplifica tus viajes con Tu Destino Taxi. Seguro, rápido y confiable.</p>
+                    <button class="btn-accion">Reservar Viaje 🚗</button>
+                </div>
+
+                <h2 class="titulo-seccion">¿Por qué elegirnos?</h2>
+                <div class="grid-caracteristicas">
+                    <div class="tarjeta-caracteristica">
+                        <span class="icono">📊</span>
+                        <h3>Analíticas</h3>
+                        <p>Información detallada de tus viajes y estadísticas en tiempo real.</p>
+                    </div>
+                    <div class="tarjeta-caracteristica">
+                        <span class="icono">🛡️</span>
+                        <h3>Seguridad</h3>
+                        <p>Cifrado SSL y protección avanzada para tus datos personales.</p>
+                    </div>
+                    <div class="tarjeta-caracteristica">
+                        <span class="icono">💳</span>
+                        <h3>Pagos Seguros</h3>
+                        <p>Múltiples métodos de pago protegidos y sin sorpresas.</p>
+                    </div>
+                    <div class="tarjeta-caracteristica">
+                        <span class="icono">👥</span>
+                        <h3>Fácil Uso</h3>
+                        <p>Diseñada para que cualquiera pueda usarla sin complicaciones.</p>
+                    </div>
+                    <div class="tarjeta-caracteristica">
+                        <span class="icono">🔄</span>
+                        <h3>Colaboración</h3>
+                        <p>Comparte viajes y coordina con conductores y pasajeros fácilmente.</p>
+                    </div>
+                    <div class="tarjeta-caracteristica">
+                        <span class="icono">📱</span>
+                        <h3>Redes Sociales</h3>
+                        <p>Síguenos y contáctanos desde tus redes favoritas.</p>
+                    </div>
+                </div>
+
+                <h2 class="titulo-seccion">Lo que dicen nuestros clientes</h2>
+                <div class="grid-testimonios">
+                    <div class="tarjeta-testimonio">
+                        <p class="estrellas">★★★★★</p>
+                        <p>"¡Excelente servicio! Siempre puntuales y muy seguros. Los recomiendo totalmente."</p>
+                        <strong>Cliente Frecuente</strong>
+                    </div>
+                    <div class="tarjeta-testimonio">
+                        <p class="estrellas">★★★★★</p>
+                        <p>"El servicio más confiable que hemos utilizado. Conductores profesionales y vehículos impecables."</p>
+                        <strong>Cliente Satisfecho</strong>
+                    </div>
+                    <div class="tarjeta-testimonio">
+                        <p class="estrellas">★★★★★</p>
+                        <p>"Simplemente increíble! Siempre llegan a tiempo y los precios son justos."</p>
+                        <strong>Cliente Feliz</strong>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: SERVICIOS -->
+            <section id="sec-servicios" class="seccion">
+                <h2 class="titulo-seccion">Nuestros Servicios 🚗</h2>
+                <div class="grid-servicios">
+                    <div class="tarjeta-servicio">
+                        <h3>🚕 Viajes Urbanos</h3>
+                        <p>Traslados dentro de la ciudad con tarifas claras y sin sorpresas.</p>
+                    </div>
+                    <div class="tarjeta-servicio">
+                        <h3>✈️ Traslados al Aeropuerto</h3>
+                        <p>Siempre a tiempo. Monitoreamos vuelos para garantizar tu llegada.</p>
+                    </div>
+                    <div class="tarjeta-servicio">
+                        <h3>🏢 Viajes Corporativos</h3>
+                        <p>Facturación y gestión centralizada para empresas y empleados.</p>
+                    </div>
+                    <div class="tarjeta-servicio">
+                        <h3>👨‍👩‍👧‍👦 Viajes Familiares</h3>
+                        <p>Vehículos amplios y seguros para toda la familia con espacio adicional.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: PRECIOS -->
+            <section id="sec-precios" class="seccion">
+                <h2 class="titulo-seccion">Planes y Tarifas 💰</h2>
+                <div class="grid-precios">
+                    <div class="tarjeta-precio">
+                        <h3>Individual</h3>
+                        <p class="precio"><sup>$</sup>99 <span>/mes</span></p>
+                        <ul>
+                            <li>✅ 1 usuario</li>
+                            <li>✅ Viajes ilimitados</li>
+                            <li>✅ Soporte por WhatsApp</li>
+                            <li>✅ Historial de viajes</li>
+                            <li>✅ Pagos seguros</li>
+                        </ul>
+                        <button class="btn-plan">Elegir Plan</button>
+                    </div>
+                    <div class="tarjeta-precio destacado">
+                        <span class="etiqueta-mas-popular">Más Popular</span>
+                        <h3>Equipo</h3>
+                        <p class="precio"><sup>$</sup>199 <span>/mes</span></p>
+                        <ul>
+                            <li>✅ Hasta 10 usuarios</li>
+                            <li>✅ Todo del plan Individual</li>
+                            <li>✅ Facturación automática</li>
+                            <li>✅ Panel de administración</li>
+                            <li>✅ Prioridad en reservas</li>
+                        </ul>
+                        <button class="btn-plan">Elegir Plan</button>
+                    </div>
+                    <div class="tarjeta-precio">
+                        <h3>Empresarial</h3>
+                        <p class="precio"><sup>$</sup>299 <span>/mes</span></p>
+                        <ul>
+                            <li>✅ Usuarios ilimitados</li>
+                            <li>✅ Todo del plan Equipo</li>
+                            <li>✅ API e integraciones</li>
+                            <li>✅ Gerente de cuenta dedicado</li>
+                            <li>✅ Reportes avanzados</li>
+                        </ul>
+                        <button class="btn-plan">Elegir Plan</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: CONTACTO -->
+            <section id="sec-contacto" class="seccion">
+                <h2 class="titulo-seccion">Contáctanos 📞</h2>
+                <div class="contenedor-contacto">
+                    <div class="info-contacto">
+                        <p><strong>📍 Dirección:</strong> Santiago de los Caballeros, República Dominicana</p>
+                        <p><strong>📞 Teléfono:</strong> +1 (809) XXX-XXXX</p>
+                        <p><strong>✉️ Email:</strong> info@tudestinotaxi.com</p>
+                        <p><strong>⏰ Horario:</strong> 24 horas / 7 días</p>
+                    </div>
+                    <div class="redes-sociales">
+                        <h3>Síguenos 🌐</h3>
+                        <a href="#">📘 Facebook: @TuDestinoTaxi</a>
+                        <a href="#">📸 Instagram: @tudestinotaxi</a>
+                        <a href="#">🐦 Twitter: @TuDestinoTaxi</a>
+                        <a href="#">💬 WhatsApp: +1 (809) XXX-XXXX</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Pie de página -->
+        <footer class="pie-pagina">
+            <p>© 2026 Tu Destino Taxi. Todos los derechos reservados. 🚕</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
