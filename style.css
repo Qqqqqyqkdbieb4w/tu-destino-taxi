@@ -1,1 +1,351 @@
-*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f4f7fb;color:#152238}header{background:#0b63ce;color:#fff;padding:18px 18px 20px;display:flex;gap:12px;align-items:center}.logo{width:48px;height:48px;background:#fff;border-radius:14px;display:grid;place-items:center;font-size:27px}h1{font-size:21px;margin:0}header small{opacity:.9}.switch{display:flex;margin:16px;background:#fff;border-radius:14px;padding:4px;box-shadow:0 3px 14px #00000010}.switch button{flex:1;border:0;padding:12px;border-radius:11px;background:transparent;font-weight:700}.switch .active{background:#0b63ce;color:white}main{max-width:560px;margin:auto}.card{background:#fff;margin:16px;padding:18px;border-radius:18px;box-shadow:0 5px 18px #0000000c}h2,h3{margin-top:0}input{width:100%;padding:14px;border:1px solid #d9e1ec;border-radius:12px;font-size:16px}.map{height:190px;margin:14px 0;border-radius:15px;background:linear-gradient(135deg,#dcecff,#eef4f8);display:flex;align-items:center;justify-content:center;gap:8px;color:#0b63ce;font-weight:700}.fares{display:flex;gap:8px}.fares button{flex:1;padding:10px 4px;border:1px solid #d9e1ec;background:#fff;border-radius:12px}.fares .selected{border:2px solid #0b63ce}.primary{width:100%;margin-top:14px;background:#0b63ce;color:white;border:0;padding:14px;border-radius:12px;font-weight:800;font-size:16px}.secondary{width:100%;margin-top:8px;background:#eaf0f7;color:#152238;border:0;padding:12px;border-radius:12px;font-weight:700}.status{font-weight:700;text-align:center;color:#0b63ce}.online{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.online button{margin-left:auto;padding:10px 14px;border:0;border-radius:10px;background:#eaf0f7;font-weight:700}.requestBox{margin-top:15px;padding:15px;border-radius:14px;background:#fff4df;border:1px solid #ffd58a}.requestBox .primary{margin-top:8px}#dot{color:#d62828}footer{text-align:center;color:#6b7788;font-size:12px;padding:20px}
+/* ===== ESTILOS GENERALES - TU DESTINO TAXI ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background: #f8f9fa;
+    color: #202124;
+    line-height: 1.6;
+}
+
+.pantalla {
+    display: none;
+    min-height: 100vh;
+}
+.pantalla.activa {
+    display: block;
+}
+
+/* ===== LOGIN ===== */
+.contenedor-login {
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.logo-login {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 10px;
+}
+
+.contenedor-login h1 {
+    color: #1a73e8;
+    font-size: 26px;
+    margin-bottom: 5px;
+}
+
+.subtitulo-login {
+    color: #5f6368;
+    margin-bottom: 30px;
+}
+
+.grupo-input {
+    text-align: left;
+    margin-bottom: 18px;
+}
+
+.grupo-input label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #3c4043;
+}
+
+.grupo-input input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border 0.2s;
+}
+
+.grupo-input input:focus {
+    outline: none;
+    border-color: #1a73e8;
+}
+
+.btn-principal {
+    width: 100%;
+    padding: 14px;
+    background: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s;
+}
+.btn-principal:hover { background: #1557b0; }
+
+.btn-secundario {
+    width: 100%;
+    padding: 12px;
+    background: white;
+    color: #1a73e8;
+    border: 1px solid #1a73e8;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.btn-secundario:hover { background: #e8f0fe; }
+
+.error {
+    color: #d93025;
+    margin-top: 12px;
+    font-size: 15px;
+}
+
+/* ===== BARRA SUPERIOR ===== */
+.barra-superior {
+    background: #1a73e8;
+    color: white;
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.info-usuario {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+}
+
+.btn-salir {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.btn-salir:hover { background: rgba(255,255,255,0.3); }
+
+/* ===== NAVEGACIÓN ===== */
+.navegacion {
+    display: flex;
+    background: white;
+    border-bottom: 1px solid #e8eaed;
+    overflow-x: auto;
+}
+
+.nav-btn {
+    padding: 14px 20px;
+    background: transparent;
+    border: none;
+    font-size: 15px;
+    color: #5f6368;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+}
+.nav-btn.activo {
+    color: #1a73e8;
+    border-bottom-color: #1a73e8;
+    font-weight: 500;
+}
+.nav-btn:hover { background: #f8f9fa; }
+
+/* ===== CONTENIDO PRINCIPAL ===== */
+.contenido-principal {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.seccion { display: none; }
+.seccion.activa { display: block; }
+
+.hero {
+    background: linear-gradient(135deg, #1a73e8 0%, #4285f4 100%);
+    color: white;
+    padding: 35px 25px;
+    border-radius: 16px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.hero h3 { font-size: 24px; margin-bottom: 10px; }
+.hero-descripcion { font-size: 16px; margin-bottom: 20px; opacity: 0.95; }
+
+.btn-accion {
+    background: white;
+    color: #1a73e8;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.btn-accion:hover { background: #f8f9fa; }
+
+.titulo-seccion {
+    font-size: 22px;
+    margin: 40px 0 20px;
+    color: #202124;
+    text-align: center;
+}
+
+/* ===== GRID CARACTERÍSTICAS ===== */
+.grid-caracteristicas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.tarjeta-caracteristica {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    transition: transform 0.2s;
+}
+.tarjeta-caracteristica:hover { transform: translateY(-3px); }
+
+.tarjeta-caracteristica .icono { font-size: 40px; margin-bottom: 12px; display: block; }
+.tarjeta-caracteristica h3 { font-size: 18px; margin-bottom: 8px; color: #202124; }
+.tarjeta-caracteristica p { color: #5f6368; font-size: 15px; }
+
+/* ===== TESTIMONIOS ===== */
+.grid-testimonios {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.tarjeta-testimonio {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 12px;
+    border-left: 4px solid #1a73e8;
+}
+
+.estrellas { color: #fbbc04; font-size: 18px; margin-bottom: 10px; }
+.tarjeta-testimonio p { font-style: italic; color: #3c4043; margin-bottom: 12px; }
+.tarjeta-testimonio strong { color: #202124; }
+
+/* ===== SERVICIOS ===== */
+.grid-servicios {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.tarjeta-servicio {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+.tarjeta-servicio h3 { font-size: 18px; margin-bottom: 10px; color: #1a73e8; }
+.tarjeta-servicio p { color: #5f6368; }
+
+/* ===== PRECIOS ===== */
+.grid-precios {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.tarjeta-precio {
+    background: white;
+    padding: 30px 25px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    position: relative;
+}
+.tarjeta-precio.destacado {
+    border: 2px solid #1a73e8;
+    transform: scale(1.03);
+}
+
+.etiqueta-mas-popular {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1a73e8;
+    color: white;
+    padding: 4px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.tarjeta-precio h3 { font-size: 20px; margin-bottom: 10px; }
+.precio { font-size: 42px; font-weight: 700; color: #1a73e8; margin-bottom: 20px; }
+.precio span { font-size: 16px; color: #5f6368; font-weight: normal; }
+
+.tarjeta-precio ul { list-style: none; margin-bottom: 25px; text-align: left; }
+.tarjeta-precio li { padding: 8px 0; border-bottom: 1px solid #f1f3f4; font-size: 15px; }
+
+.btn-plan {
+    width: 100%;
+    padding: 13px;
+    background: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.btn-plan:hover { background: #1557b0; }
+
+/* ===== CONTACTO ===== */
+.contenedor-contacto {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.info-contacto p {
+    padding: 10px 0;
+    font-size: 16px;
+    border-bottom: 1px solid #e8eaed;
+}
+
+.redes-sociales h3 { margin-bottom: 15px; color: #1a73e8; }
+.redes-sociales a {
+    display: block;
+    padding: 10px 0;
+    color: #1a73e8;
+    text-decoration: none;
+    font-size: 16px;
+}
+.redes-sociales a:hover { text-decoration: underline; }
+
+/* ===== PIE DE PÁGINA ===== */
+.pie-pagina {
+    text-align: center;
+    padding: 25px;
+    color: #5f6368;
+    font-size: 14px;
+    border-top: 1px solid #e8eaed;
+    margin-top: 40px;
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 768px) {
+    .contenedor-contacto { grid-template-columns: 1fr; }
+    .tarjeta-precio.destacado { transform: none; }
+    .navegacion { justify-content: space-around; }
+}
